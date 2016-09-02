@@ -1,0 +1,26 @@
+desc "Create a new JIRA version for the next build"
+lane :create_version do
+  version_id = create_jira_version(
+    url: 'https://jira.yourdomain.com',
+    username: 'your_jira_username',
+    # Tip: Use the FL_CREATE_JIRA_VERSION_PASSWORD variable to
+    # prevent hardcoding a password in your Fastfile
+    password: 'your_jira_password', 
+    project_name: 'JIRA', # This is the tag that prefixes your JIRA tickets
+    name: "iOS 1.2.3",
+    description: 'Fastlane auto-created version'
+  )
+end
+
+desc "Releases a JIRA version"
+lane :release_version do
+  version_id = release_jira_version(
+    url: 'https://jira.yourdomain.com',
+    username: 'your_jira_username',
+    # Tip: Use the FL_RELEASE_JIRA_VERSION_PASSWORD variable to
+    # prevent hardcoding a password in your Fastfile
+    password: 'your_jira_password', 
+    project_name: 'JIRA', # This is the tag that prefixes your JIRA tickets
+    name: "iOS 1.2.2",
+  )
+end
