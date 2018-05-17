@@ -21,6 +21,7 @@ module Fastlane
         archived     = params[:archived]
         released     = params[:released]
         start_date   = params[:start_date]
+        use_ssl      = params[:use_ssl]
 
         options = {
           username:     username,
@@ -28,6 +29,7 @@ module Fastlane
           site:         site,
           context_path: context_path,
           auth_type:    auth_type,
+          use_ssl:      use_ssl,
           read_timeout: 120
         }
 
@@ -147,7 +149,13 @@ module Fastlane
                                        type: String,
                                        is_string: true,
                                        optional: true,
-                                       default_value: Date.today.to_s)
+                                       default_value: Date.today.to_s),
+          FastlaneCore::ConfigItem.new(key: :use_ssl,
+                                       env_name: "FL_CREATE_JIRA_VERSION_USE_SSL",
+                                       description: "If true communication with jira will be done by using https",
+                                       is_string: false,
+                                       optional: true,
+                                       default_value: true)
         ]
       end
 
