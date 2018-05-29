@@ -1,7 +1,7 @@
 module Fastlane
   module Actions
     module SharedValues
-      CREATE_JIRA_VERSION_VERSION_ID = :CREATE_JIRA_VERSION_VERSION_ID
+      GET_JIRA_VERSION_NAMES = :GET_JIRA_VERSION_NAMES
     end
 
     class GetJiraVersionsAction < Action
@@ -35,11 +35,8 @@ module Fastlane
         end
 
         version_names = project.versions.map { |version| version.name }
-        Actions.lane_context[SharedValue::GET_JIRA_VERSION_NAMES] = version_names
+        Actions.lane_context[SharedValues::GET_JIRA_VERSION_NAMES] = version_names
         return version_names
-      rescue
-        UI.user_error!("Failed to fetch JIRA versions: #{$!.response.body}")
-        false
       end
 
       #####################################################
